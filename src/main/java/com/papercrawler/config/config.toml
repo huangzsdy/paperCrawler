@@ -1,0 +1,64 @@
+# 学术论文爬虫配置文件
+
+# 爬虫配置
+[crawler]
+mode = "thread"  # thread, async, distributed
+max_connections = 20
+request_timeout = 30
+retry_attempts = 3
+delay_between_requests = 1.0
+user_agent = "AcademicPaperCrawler/1.0"
+log_level = "INFO"
+
+# 存储配置
+[storage]
+output_dir = "./data"
+output_format = "json"  # json, csv, xml
+max_file_size_mb = 100
+batch_size = 50
+database_enabled = false
+
+# arXiv API配置
+[arxiv]
+base_url = "https://export.arxiv.org/api/query"
+search_query = "cat:cond-mat+OR+cat:hep-+OR+cat:quant-ph+OR+cat:physics+OR+cat:cond-mat.mtrl-sci+OR+cat:physics.chem-ph+OR+cat:q-bio+OR+cat:eess.SP+OR+cat:eess.SY"
+max_results = 1000
+start_index = 0
+sort_by = "submittedDate"
+sort_order = "descending"
+
+# bioRxiv配置
+[biorxiv]
+base_url = "https://api.biorxiv.org/details/biorxiv"
+cursor = 0
+interval = 100
+format = "json"
+
+# ChemRxiv配置
+[chemrxiv]
+base_url = "https://chemrxiv.org/engage/chemrxiv/public-api/v1/items"
+page_size = 100
+sort = "publishedDate"
+
+# 关键词分类
+[keywords]
+physics = ["cond-mat", "hep-", "quant-ph", "physics"]
+materials = ["cond-mat.mtrl-sci"]
+chemistry = ["physics.chem-ph"]
+biology = ["q-bio"]
+electrical_engineering = ["eess.SP", "eess.SY"]
+
+# 数据库配置
+[database]
+url = "jdbc:mysql://localhost:3306/papers"
+username = "crawler"
+password = "password"
+pool_size = 10
+
+# 代理配置
+[proxy]
+enabled = false
+host = "proxy.example.com"
+port = 8080
+username = ""
+password = ""
